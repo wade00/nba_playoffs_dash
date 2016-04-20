@@ -4,9 +4,34 @@ const nbaEndpoints = {
   playerGameLogs: 'http://stats.nba.com/stats/playergamelog?LeagueID=00&PlayerID=201939&Season=2015-16&SeasonType=Playoffs'
 }
 
-const getCurrentTeams = () =>
-  console.log('hi')
+const getPlayoffBracket = () => {
+  const request = new Request(nbaEndpoints.bracket, {
+    method: 'GET',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' }
+  })
+
+  return fetch(request)
+    .then((response) => response.json())
+      .then((response) => response.pb.r)
+}
+
+const getTeamRosters = (series) => {
+  const teamIds = new Array(series.tid1, series.tid2)
+  let players   = []
+
+  const request = new Request(`${nbaEndpoints.currentPlayers}&TEAM_ID=${teamIds[0]}`, {
+    method: 'GET',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' }
+  })
+
+  return fetch(request)
+    .then((response) => response.json())
+      .then((response) => console.log(response))
+}
 
 module.exports = {
-  getCurrentTeams: getCurrentTeams
+  getPlayoffBracket: getPlayoffBracket,
+  getTeamRosters: getTeamRosters
 }
