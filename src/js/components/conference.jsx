@@ -3,7 +3,7 @@ import Series from './series.jsx'
 
 const Conference = ({ conference }) =>
   <div>
-    <h2>{conference.val}</h2>
+    <h4>{conference.val}</h4>
     { conference.ser.map((series, idx) => <Series key={idx} series={series} />)}
   </div>
 

@@ -8,9 +8,9 @@ export default class Series extends React.Component {
     const { series } = props
     this.state = { isReady: false }
 
-    NBAStore.getTeamRosters(series)
-      .then((response) =>
-        this.setState({ round: response[0].d, bracket: response[0].co, isReady: true }))
+    // NBAStore.getTeamRosters(series)
+    //   .then((response) =>
+    //     this.setState({ round: response[0].d, bracket: response[0].co, isReady: true }))
   }
 
   render() {
