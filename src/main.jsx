@@ -26,10 +26,16 @@ const Main = React.createClass({
     window.addEventListener("keydown", (key) => {
       if (key.keyCode === 40) {
         const scrollPoint = window.scrollY + (window.innerHeight - 40)
-        window.scrollTo(0, scrollPoint)
+        window.scroll(window.scrollX, scrollPoint)
       } else if (key.keyCode === 38) {
         const scrollPoint = window.scrollY - (window.innerHeight - 40)
-        window.scrollTo(0, scrollPoint)
+        window.scroll(window.scrollX, scrollPoint)
+      } else if (key.keyCode === 39) {
+        const scrollPoint = window.scrollX + (window.innerWidth - 40)
+        window.scroll(scrollPoint, window.scrollY)
+      } else if (key.keyCode === 37) {
+        const scrollPoint = window.scrollX - (window.innerWidth - 40)
+        window.scroll(scrollPoint, window.scrollY)
       }
     })
   },
@@ -39,10 +45,12 @@ const Main = React.createClass({
 
     const mainStyles = {
       margin: '-10px',
-      padding: '10px',
+      padding: '5px',
       fontFamily: 'Helvetica',
       textAlign: 'center',
-      backgroundColor: '#F7F7F7'
+      backgroundColor: '#F7F7F7',
+      overflowX: 'initial',
+      width: '300vw'
     }
 
     const roundHeader = {
@@ -61,7 +69,7 @@ const Main = React.createClass({
             </div>
             {
               statLeaders.map((stat, idx) =>
-                <StatLeader key={idx} statName={stat.name} leader={stat.rowSet[0]} />)
+                <StatLeader key={idx} statName={stat.name} leaders={stat.rowSet.slice(0,3)} />)
             }
           </div>
         :
